@@ -1,0 +1,24 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install
+      run: |
+        sudo apt update
+        sudo apt upgrade
+        sudo apt-get install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
+    - name: qmake
+      run: qmake
+    - name: make
+      run: make
